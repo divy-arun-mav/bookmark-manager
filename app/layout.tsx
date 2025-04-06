@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Bookmark Manager App",
-  description: "Bookmark manager app is an app ",
+  description: "Bookmark manager is an app to manage and store all your bookmarks and keep them organized for you.",
 };
 
 export default function RootLayout({

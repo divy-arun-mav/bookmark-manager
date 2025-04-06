@@ -17,8 +17,11 @@ export interface Bookmark {
 const HomePage = () => {
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
   const [filter, setFilter] = useState<string>("All");
+  const [search, setSearch] = useState<string>("");
+  const [sort, setSort] = useState<string>("DateNewest");
   const [darkMode, setDarkMode] = useState<boolean>(false);
   const [categories, setCategories] = useState<string[]>(["Work", "Personal", "Other"]);
+  const [showDropDown, setShowDropDown] = useState<boolean>(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("bookmarks");
@@ -59,38 +62,60 @@ const HomePage = () => {
     setBookmarks((prev) => prev.filter((bm) => bm.id !== id));
   };
 
+  const updateBookmark = (updatedBookmark: Bookmark) => {
+    setBookmarks((prev) =>
+      prev.map((bm) => (bm.id === updatedBookmark.id ? updatedBookmark : bm))
+    );
+  };
+
   const toggleDarkMode = () => {
     setDarkMode((prev) => !prev);
   };
 
-  const filteredBookmarks =
-    filter === "All"
-      ? bookmarks
-      : bookmarks.filter((bm) => bm.category === filter);
+  let filteredBookmarks = filter === "All"
+    ? bookmarks
+    : bookmarks.filter((bm) => bm.category === filter);
 
-  const lightMode = () => {
-    return (
-      <Image
-        width={20}
-        height={20}
-        className="w-5"
-        src="https://static.thenounproject.com/png/2540391-200.png"
-        alt="Light Mode Icon"
-      />
+  if (search.trim() !== "") {
+    filteredBookmarks = filteredBookmarks.filter((bm) =>
+      bm.title.toLowerCase().includes(search.toLowerCase()) ||
+      bm.url.toLowerCase().includes(search.toLowerCase())
     );
-  };
+  }
 
-  const darkModeUI = () => {
-    return (
-      <Image
-        width={20}
-        height={20}
-        className="w-5"
-        src="https://www.svgrepo.com/show/381213/dark-mode-night-moon.svg"
-        alt="Dark Mode Icon"
-      />
+  if (sort === "DateNewest") {
+    filteredBookmarks.sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
-  };
+  } else if (sort === "DateOldest") {
+    filteredBookmarks.sort(
+      (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+    );
+  } else if (sort === "TitleAZ") {
+    filteredBookmarks.sort((a, b) => a.title.localeCompare(b.title));
+  } else if (sort === "TitleZA") {
+    filteredBookmarks.sort((a, b) => b.title.localeCompare(a.title));
+  }
+
+  const lightMode = () => (
+    <Image
+      width={20}
+      height={20}
+      className="w-5"
+      src="https://static.thenounproject.com/png/2540391-200.png"
+      alt="Light Mode Icon"
+    />
+  );
+
+  const darkModeUI = () => (
+    <Image
+      width={20}
+      height={20}
+      className="w-5"
+      src="https://www.svgrepo.com/show/381213/dark-mode-night-moon.svg"
+      alt="Dark Mode Icon"
+    />
+  );
 
   return (
     <div data-theme={darkMode ? "dark" : "light"} className="text-black dark:text-white">
@@ -116,11 +141,72 @@ const HomePage = () => {
             filter={filter}
             setFilter={setFilter}
             categories={categories}
+            search={search}
+            setSearch={setSearch}
           />
+
+          <div className="mb-4 p-4 bg-white dark:bg-gray-800 rounded shadow relative">
+            <div
+              onClick={() => setShowDropDown(!showDropDown)}
+              className="p-3 bg-gray-100 dark:bg-gray-900 rounded cursor-pointer"
+            >
+              Sort:{" "}
+              {sort === "DateNewest"
+                ? "Date: Newest First"
+                : sort === "DateOldest"
+                  ? "Date: Oldest First"
+                  : sort === "TitleAZ"
+                    ? "Title: A - Z"
+                    : "Title: Z - A"}
+            </div>
+            {showDropDown && (
+              <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 rounded shadow">
+                <p
+                  className="p-3 hover:bg-gray-200 dark:hover:bg-gray-900 cursor-pointer"
+                  onClick={() => {
+                    setSort("DateNewest");
+                    setShowDropDown(false);
+                  }}
+                >
+                  Date: Newest First
+                </p>
+                <p
+                  className="p-3 hover:bg-gray-200 dark:hover:bg-gray-900 cursor-pointer"
+                  onClick={() => {
+                    setSort("DateOldest");
+                    setShowDropDown(false);
+                  }}
+                >
+                  Date: Oldest First
+                </p>
+                <p
+                  className="p-3 hover:bg-gray-200 dark:hover:bg-gray-900 cursor-pointer"
+                  onClick={() => {
+                    setSort("TitleAZ");
+                    setShowDropDown(false);
+                  }}
+                >
+                  Title: A - Z
+                </p>
+                <p
+                  className="p-3 hover:bg-gray-200 dark:hover:bg-gray-900 cursor-pointer"
+                  onClick={() => {
+                    setSort("TitleZA");
+                    setShowDropDown(false);
+                  }}
+                >
+                  Title: Z - A
+                </p>
+              </div>
+            )}
+          </div>
 
           <BookmarkList
             bookmarks={filteredBookmarks}
             deleteBookmark={deleteBookmark}
+            updateBookmark={updateBookmark}
+            categories={categories}
+            setCategories={setCategories}
           />
         </div>
       </div>
