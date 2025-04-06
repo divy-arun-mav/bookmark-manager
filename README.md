@@ -1,7 +1,8 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" align="center" width="30%">
+    <img src="https://github.com/divy-arun-mav/bookmark-manager/blob/master/app/icon.png" align="center" width="30%">
 </p>
 <p align="center"><h1 align="center">BOOKMARK-MANAGER</h1></p>
+
 <p align="center">
 	<em><code>A minimalistic yet powerful bookmark management application built with Next.js and TypeScript. Save, filter, and manage your bookmarks all in one place with a beautiful and responsive UI.</code></em>
 </p>
@@ -10,6 +11,9 @@
 	<img src="https://img.shields.io/github/last-commit/divy-arun-mav/bookmark-manager?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/divy-arun-mav/bookmark-manager?style=default&color=0080ff" alt="repo-top-language">
 	<img src="https://img.shields.io/github/languages/count/divy-arun-mav/bookmark-manager?style=default&color=0080ff" alt="repo-language-count">
+	<p align="center">
+	<em><code><a href="https://book-markmanager.vercel.app/">A demo is worth a thousand words!</a></code></em>
+</p>
 </p>
 <p align="center"><!-- default option, no dependency badges. -->
 </p>
@@ -27,12 +31,10 @@
 - [🚀 Getting Started](#-getting-started)
   - [☑️ Prerequisites](#-prerequisites)
   - [⚙️ Installation](#-installation)
-  - [🤖 Usage](#🤖-usage)
-  - [🧪 Testing](#🧪-testing)
+  - [🤖 Usage](#-usage)
+  - [🧪 Testing](#-testing)
 - [📌 Project Roadmap](#-project-roadmap)
-- [🔰 Contributing](#-contributing)
-- [🎗 License](#-license)
-- [🙌 Acknowledgments](#-acknowledgments)
+- [🔰 Contribution](#-contribution)
 
 ---
 
@@ -47,6 +49,78 @@
 <ul> <li>🔖 Add, edit, and delete bookmarks easily.</li> <li>🎯 Filter bookmarks by tags or titles.</li> <li>🗂 Categorize bookmarks with intuitive UI.</li> <li>🌐 Automatically fetch website metadata (coming soon).</li> <li>🌙 Dark and light theme support (coming soon).</li> </ul>
 
 ---
+
+---
+## Project Architecture: 
+
+  1. Components Architecture:
+
+  ![image](https://github.com/divy-arun-mav/bookmark-manager/blob/master/public/images/1.png)
+
+  2. Use Case Diagram:
+     
+  ![image](https://github.com/divy-arun-mav/bookmark-manager/blob/master/public/images/2.png)
+
+  3. components diagram:
+     
+  ![image](https://github.com/divy-arun-mav/bookmark-manager/blob/master/public/images/3.png)
+
+  4. sequence diagram:
+     
+  ![image](https://github.com/divy-arun-mav/bookmark-manager/blob/master/public/images/4.png)
+
+  5. Activity Diagram:
+     
+  ![image](https://github.com/divy-arun-mav/bookmark-manager/blob/master/public/images/5.png)
+
+  6. Sequence Diagram :
+     
+  ![image](https://github.com/divy-arun-mav/bookmark-manager/blob/master/public/images/6.png)
+
+  7. CodeBase Diagram:
+     
+  ![image](https://github.com/divy-arun-mav/bookmark-manager/blob/master/public/images/7.png)
+
+
+## screenshots of project :
+
+---
+
+### 📌 Adding a Bookmark with Custom Category  
+![image](https://raw.githubusercontent.com/divy-arun-mav/bookmark-manager/master/public/images/add%20bookmark%20with%20custom%20category.png)
+
+### 📌 Bookmark Added Confirmation  
+![image](https://raw.githubusercontent.com/divy-arun-mav/bookmark-manager/master/public/images/bookmark%20added.png)
+
+### 📌 Filtering by Category  
+![image](https://raw.githubusercontent.com/divy-arun-mav/bookmark-manager/master/public/images/filter%20by%20category.png)
+
+### 📌 Sorting from A to Z  
+![image](https://raw.githubusercontent.com/divy-arun-mav/bookmark-manager/master/public/images/AtoZ.png)
+
+### 📌 Sorting from Z to A  
+![image](https://raw.githubusercontent.com/divy-arun-mav/bookmark-manager/master/public/images/ZtoA.png)
+
+### 📌 Sorting by Newest First  
+![image](https://raw.githubusercontent.com/divy-arun-mav/bookmark-manager/master/public/images/newest%20first.png)
+
+### 📌 Sorting by Oldest First  
+![image](https://raw.githubusercontent.com/divy-arun-mav/bookmark-manager/master/public/images/oldest%20first.png)
+
+### 📌 Dark Mode View 1  
+![image](https://raw.githubusercontent.com/divy-arun-mav/bookmark-manager/master/public/images/Darkmode1.png)
+
+### 📌 Dark Mode View 2  
+![image](https://raw.githubusercontent.com/divy-arun-mav/bookmark-manager/master/public/images/darkmode2.png)
+
+### 📌 Light Mode View 1  
+![image](https://raw.githubusercontent.com/divy-arun-mav/bookmark-manager/master/public/images/lightmode1.png)
+
+### 📌 Light Mode View 2  
+![image](https://raw.githubusercontent.com/divy-arun-mav/bookmark-manager/master/public/images/lightmode2.png)
+
+---
+
 
 ## 📁 Project Structure
 
