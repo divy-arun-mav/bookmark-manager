@@ -83,7 +83,7 @@ const BookmarkForm: React.FC<BookmarkFormProps> = ({ addBookmark, categories, se
                 <label className="block mb-1">Category:</label>
                 <div onClick={() => { setShowDropDown(!showDropDown); setInputCat(false)}} className="p-3 bg-gray-100 dark:bg-gray-900 rounded dark:text-white">{category || "Select Category"}</div>
                 {showDropDown && (
-                    <div className="w-full p-3 gap-1 shadow">
+                    <div className="absolute z-10 mt-1 bg-white dark:bg-gray-800 w-full p-3 gap-1 shadow">
                         {categories.map((cat, idx) => (
                             <p onClick={() => { setCategory(cat); setShowDropDown(false) }} key={idx} className="p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-900 cursor-pointer">
                                 {cat}
