@@ -1,24 +1,27 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, Dispatch, SetStateAction } from "react";
 import { Bookmark } from "../app/page";
 import { v4 as uuidv4 } from "uuid";
 
 interface BookmarkFormProps {
     addBookmark: (bookmark: Bookmark) => void;
     categories: string[];
+    setCategories: Dispatch<SetStateAction<string[]>>;
 }
 
-const BookmarkForm: React.FC<BookmarkFormProps> = ({ addBookmark, categories }) => {
+const BookmarkForm: React.FC<BookmarkFormProps> = ({ addBookmark, categories, setCategories }) => {
     const [title, setTitle] = useState("");
     const [url, setUrl] = useState("");
-    const [category, setCategory] = useState(categories[0] || "");
+    const [category, setCategory] = useState("");
+    const [showDropDown, setShowDropDown] = useState<boolean>(false);
+    const [newCat, setNewCat] = useState<string>("");
+    const [inputCat, setInputCat] = useState<boolean>(false);
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        if (!title || !url) return; // basic validation
+        if (!title || !url) return;
 
-        // Simple URL validation
         try {
             new URL(url);
         } catch {
@@ -39,6 +42,16 @@ const BookmarkForm: React.FC<BookmarkFormProps> = ({ addBookmark, categories }) 
         setUrl("");
         setCategory(categories[0] || "");
     };
+
+    const addNewCategory = (e: string) => {
+        if (e) {
+            setCategories(prev => [e,...prev]);
+            setCategory(e);
+            setInputCat(false);
+            setShowDropDown(false);
+            setNewCat("");
+        }
+    }
 
     return (
         <form
@@ -68,17 +81,28 @@ const BookmarkForm: React.FC<BookmarkFormProps> = ({ addBookmark, categories }) 
             </div>
             <div className="mb-2">
                 <label className="block mb-1">Category:</label>
-                <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="w-full p-2 border rounded"
-                >
-                    {categories.map((cat, idx) => (
-                        <option key={idx} value={cat}>
-                            {cat}
-                        </option>
-                    ))}
-                </select>
+                <div onClick={() => { setShowDropDown(!showDropDown); setInputCat(false)}} className="p-3 bg-gray-100 dark:bg-gray-900 rounded dark:text-white">{category || "Select Category"}</div>
+                {showDropDown && (
+                    <div className="w-full p-3 gap-1 shadow">
+                        {categories.map((cat, idx) => (
+                            <p onClick={() => { setCategory(cat); setShowDropDown(false) }} key={idx} className="p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-900 cursor-pointer">
+                                {cat}
+                            </p>
+                        ))}
+                        {inputCat && (
+                            <div className="flex justify-center items-start flex-col">
+                                <input
+                                    type="text"
+                                    value={newCat}
+                                    onChange={(e) => setNewCat(e.target.value)}
+                                    className="w-full p-2 border rounded"
+                                />
+                                <button onClick={() => addNewCategory(newCat)} className="text-center mt-2 w-max p-3 px-5 bg-blue-400 text-white cursor-pointer rounded-md">Add category</button>
+                            </div>
+                        )}
+                        {!inputCat && (<button onClick={() => setInputCat(true)} className="text-center w-max p-3 px-5 bg-blue-400 text-white cursor-pointer rounded-md">Add Category +</button>)}
+                    </div>
+                )}
             </div>
             <button
                 type="submit"
