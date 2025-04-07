@@ -20,7 +20,11 @@ const HomePage = () => {
   const [search, setSearch] = useState<string>("");
   const [sort, setSort] = useState<string>("DateNewest");
   const [darkMode, setDarkMode] = useState<boolean>(false);
-  const [categories, setCategories] = useState<string[]>(["Work", "Personal", "Other"]);
+  const [categories, setCategories] = useState<string[]>([
+    "Work",
+    "Personal",
+    "Other",
+  ]);
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
 
   useEffect(() => {
@@ -72,24 +76,28 @@ const HomePage = () => {
     setDarkMode((prev) => !prev);
   };
 
-  let filteredBookmarks = filter === "All"
-    ? bookmarks
-    : bookmarks.filter((bm) => bm.category === filter);
+  let filteredBookmarks =
+    filter === "All"
+      ? bookmarks
+      : bookmarks.filter((bm) => bm.category === filter);
 
   if (search.trim() !== "") {
-    filteredBookmarks = filteredBookmarks.filter((bm) =>
-      bm.title.toLowerCase().includes(search.toLowerCase()) ||
-      bm.url.toLowerCase().includes(search.toLowerCase())
+    filteredBookmarks = filteredBookmarks.filter(
+      (bm) =>
+        bm.title.toLowerCase().includes(search.toLowerCase()) ||
+        bm.url.toLowerCase().includes(search.toLowerCase())
     );
   }
 
   if (sort === "DateNewest") {
     filteredBookmarks.sort(
-      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
   } else if (sort === "DateOldest") {
     filteredBookmarks.sort(
-      (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      (a, b) =>
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
     );
   } else if (sort === "TitleAZ") {
     filteredBookmarks.sort((a, b) => a.title.localeCompare(b.title));
@@ -118,7 +126,10 @@ const HomePage = () => {
   );
 
   return (
-    <div data-theme={darkMode ? "dark" : "light"} className="text-black dark:text-white">
+    <div
+      data-theme={darkMode ? "dark" : "light"}
+      className="text-black dark:text-white"
+    >
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
         <div className="container mx-auto p-4">
           <header className="flex items-center justify-between mb-4">
@@ -145,7 +156,7 @@ const HomePage = () => {
             setSearch={setSearch}
           />
 
-          <div className="mb-4 p-4 bg-white dark:bg-gray-800 rounded shadow relative">
+          <div className="mb-4 p-4 bg-white dark:bg-gray-800 rounded shadow">
             <div
               onClick={() => setShowDropDown(!showDropDown)}
               className="p-3 bg-gray-100 dark:bg-gray-900 rounded cursor-pointer"
@@ -154,13 +165,13 @@ const HomePage = () => {
               {sort === "DateNewest"
                 ? "Date: Newest First"
                 : sort === "DateOldest"
-                  ? "Date: Oldest First"
-                  : sort === "TitleAZ"
-                    ? "Title: A - Z"
-                    : "Title: Z - A"}
+                ? "Date: Oldest First"
+                : sort === "TitleAZ"
+                ? "Title: A - Z"
+                : "Title: Z - A"}
             </div>
             {showDropDown && (
-              <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 rounded shadow">
+              <div className="absolute z-10 mt-1 bg-white dark:bg-gray-800 w-full p-3 gap-1 shadow rounded">
                 <p
                   className="p-3 hover:bg-gray-200 dark:hover:bg-gray-900 cursor-pointer"
                   onClick={() => {
