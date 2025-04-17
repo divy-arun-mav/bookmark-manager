@@ -82,9 +82,9 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
 
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 w-full">
             {bookmarks.map((bm) => (
-                <div key={bm.id} className="p-4 border rounded bg-white dark:bg-gray-800 shadow">
+                <div key={bm.id} className="p-4 rounded-md bg-white dark:bg-gray-800 shadow-sm">
                     {editingId === bm.id ? (
                         <div className="space-y-2">
                             <input
@@ -172,7 +172,7 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
                     ) : (
                         <div className="flex items-center justify-between">
                             <div>
-                                <h3 className="font-bold text-lg">{bm.title}</h3>
+                                    <h3 className="font-bold text-lg"><a href={bm.url}>{bm.title}</a></h3>
                                 <p className="text-blue-600">{bm.url}</p>
                                 <span className="w-max my-2 inline-block px-5 py-1 bg-blue-200 dark:bg-blue-600 text-blue-800 dark:text-blue-100 rounded-full">
                                     {bm.category}

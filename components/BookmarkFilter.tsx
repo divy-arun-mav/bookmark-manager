@@ -25,7 +25,7 @@ const BookmarkFilter: React.FC<BookmarkFilterProps> = ({
   };
 
   return (
-    <div className="mb-4 p-4 bg-white dark:bg-gray-800 rounded shadow">
+    <div className="w-full mb-4 p-4 bg-white dark:bg-gray-800 rounded shadow">
       <h2 className="text-xl font-semibold mb-2">Filter Bookmarks</h2>
 
       <div className="mb-4">
@@ -45,7 +45,7 @@ const BookmarkFilter: React.FC<BookmarkFilterProps> = ({
         {filter}
       </div>
       {showDropDown && (
-        <div className="absolute z-10 mt-1 bg-white dark:bg-gray-800 w-full p-3 gap-1 shadow rounded">
+        <div className="absolute z-10 mt-1 bg-white dark:bg-gray-800 w-max p-3 gap-1 shadow-2xl rounded">
           <p
             onClick={() => handleSelect("All")}
             className="p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-900 cursor-pointer"

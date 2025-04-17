@@ -59,6 +59,17 @@ const HomePage = () => {
       alert("Please select the category");
       return;
     }
+    if (
+      !bookmark?.title ||
+      !/^[a-zA-Z]+$/.test(bookmark.title)
+    ) {
+      alert("Please enter a valid title (letters only)");
+      return;
+    }
+    if (!bookmark?.url || !bookmark.url.startsWith("https://")) {
+      alert("Please enter valid url i.e url does not start with https://");
+      return;
+    }
     setBookmarks((prev) => [bookmark, ...prev]);
   };
 
@@ -142,12 +153,17 @@ const HomePage = () => {
             </div>
           </header>
 
-          <BookmarkForm
-            addBookmark={addBookmark}
-            categories={categories}
-            setCategories={setCategories}
-          />
 
+          <div className="w-full flex justify-between items-start flex-col md:flex-row gap-1">
+            <div className="w-full md:w-max md:min-w-4/12 justify-start items-start">
+              <BookmarkForm
+                addBookmark={addBookmark}
+                categories={categories}
+                setCategories={setCategories}
+              />
+          </div>
+        
+            <div className="p-2 bg-white shadow dark:bg-gray-700 w-full rounded flex justify-center items-center flex-col">
           <BookmarkFilter
             filter={filter}
             setFilter={setFilter}
@@ -156,7 +172,7 @@ const HomePage = () => {
             setSearch={setSearch}
           />
 
-          <div className="mb-4 p-4 bg-white dark:bg-gray-800 rounded shadow">
+          <div className="w-full mb-4 p-4 bg-white dark:bg-gray-800 rounded shadow">
             <div
               onClick={() => setShowDropDown(!showDropDown)}
               className="p-3 bg-gray-100 dark:bg-gray-900 rounded cursor-pointer"
@@ -171,7 +187,7 @@ const HomePage = () => {
                 : "Title: Z - A"}
             </div>
             {showDropDown && (
-              <div className="absolute z-10 mt-1 bg-white dark:bg-gray-800 w-full p-3 gap-1 shadow rounded">
+              <div className="absolute z-10 mt-1 bg-white dark:bg-gray-800 w-max p-3 gap-1 shadow-2xl rounded">
                 <p
                   className="p-3 hover:bg-gray-200 dark:hover:bg-gray-900 cursor-pointer"
                   onClick={() => {
@@ -218,7 +234,9 @@ const HomePage = () => {
             updateBookmark={updateBookmark}
             categories={categories}
             setCategories={setCategories}
-          />
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

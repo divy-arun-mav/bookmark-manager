@@ -56,7 +56,7 @@ const BookmarkForm: React.FC<BookmarkFormProps> = ({ addBookmark, categories, se
     return (
         <form
             onSubmit={handleSubmit}
-            className="mb-4 p-4 bg-white dark:bg-gray-800 rounded shadow"
+            className="mb-4 p-4 bg-white dark:bg-gray-700 rounded shadow"
         >
             <h2 className="text-xl font-semibold mb-2">Add Bookmark</h2>
             <div className="mb-2">
@@ -72,18 +72,17 @@ const BookmarkForm: React.FC<BookmarkFormProps> = ({ addBookmark, categories, se
             <div className="mb-2">
                 <label className="block mb-1">URL:</label>
                 <input
-                    type="url"
+                    type="text"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     className="w-full p-2 border rounded"
-                    required
                 />
             </div>
             <div className="mb-2">
                 <label className="block mb-1">Category:</label>
-                <div onClick={() => { setShowDropDown(!showDropDown); setInputCat(false)}} className="p-3 bg-gray-100 dark:bg-gray-900 rounded dark:text-white">{category || "Select Category"}</div>
+                <div onClick={() => { setShowDropDown(!showDropDown); setInputCat(false)}} className="p-3 bg-gray-100 dark:bg-gray-900 rounded dark:text-white cursor-pointer">{category || "Select Category"}</div>
                 {showDropDown && (
-                    <div className="absolute z-10 mt-1 bg-white dark:bg-gray-800 w-full p-3 gap-1 shadow">
+                    <div className="absolute z-10 mt-1 bg-white dark:bg-gray-800 w-max p-3 gap-1 shadow-2xl cursor-pointer">
                         {categories.map((cat, idx) => (
                             <p onClick={() => { setCategory(cat); setShowDropDown(false) }} key={idx} className="p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-900 cursor-pointer">
                                 {cat}
